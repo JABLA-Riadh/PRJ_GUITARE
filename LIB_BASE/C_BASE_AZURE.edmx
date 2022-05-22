@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Les_Bois">
+          <Key>
+            <PropertyRef Name="ID_BOIS" />
+          </Key>
+          <Property Name="ID_BOIS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nchar" MaxLength="32" />
+          <Property Name="Origine" Type="nchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="Les_Clients">
+          <Key>
+            <PropertyRef Name="ID_CLIENT" />
+          </Key>
+          <Property Name="ID_CLIENT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nchar" MaxLength="32" />
+          <Property Name="Email" Type="nchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="Les_Guitares">
+          <Key>
+            <PropertyRef Name="ID_GUITARE" />
+          </Key>
+          <Property Name="ID_GUITARE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" />
+          <Property Name="IdVibrato" Type="int" />
+          <Property Name="IdBois_Corps" Type="int" />
+          <Property Name="IdBois_Manche" Type="int" />
+          <Property Name="IdBois_Touche" Type="int" />
+          <Property Name="IdMicro_Neck" Type="int" />
+          <Property Name="IdMicro_Central" Type="int" />
+          <Property Name="IdMicro_Bridge" Type="int" />
+        </EntityType>
+        <EntityType Name="Les_Micros">
+          <Key>
+            <PropertyRef Name="ID_MICRO" />
+          </Key>
+          <Property Name="ID_MICRO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nchar" MaxLength="32" />
+          <Property Name="Reference" Type="nchar" MaxLength="32" />
+          <Property Name="Marque" Type="nchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="Les_Vibratos">
+          <Key>
+            <PropertyRef Name="ID_VIBRATO" />
+          </Key>
+          <Property Name="ID_VIBRATO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nchar" MaxLength="32" />
+          <Property Name="Modele" Type="nchar" MaxLength="32" />
+          <Property Name="Marque" Type="nchar" MaxLength="32" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'BDD-GUIT.sys.database_firewall_rules' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'BDD-GUIT.sys.ipv6_database_firewall_rules' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <Association Name="FK_GUITARE_BOIS">
+          <End Role="Les_Bois" Type="Self.Les_Bois" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Self.Les_Guitares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Bois">
+              <PropertyRef Name="ID_BOIS" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdBois_Corps" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_BOIS1">
+          <End Role="Les_Bois" Type="Self.Les_Bois" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Self.Les_Guitares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Bois">
+              <PropertyRef Name="ID_BOIS" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdBois_Manche" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_BOIS2">
+          <End Role="Les_Bois" Type="Self.Les_Bois" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Self.Les_Guitares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Bois">
+              <PropertyRef Name="ID_BOIS" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdBois_Touche" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_CLIENT">
+          <End Role="Les_Clients" Type="Self.Les_Clients" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Self.Les_Guitares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Clients">
+              <PropertyRef Name="ID_CLIENT" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_MICRO">
+          <End Role="Les_Micros" Type="Self.Les_Micros" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Self.Les_Guitares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Micros">
+              <PropertyRef Name="ID_MICRO" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdMicro_Neck" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_MICRO1">
+          <End Role="Les_Micros" Type="Self.Les_Micros" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Self.Les_Guitares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Micros">
+              <PropertyRef Name="ID_MICRO" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdMicro_Central" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_MICRO2">
+          <End Role="Les_Micros" Type="Self.Les_Micros" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Self.Les_Guitares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Micros">
+              <PropertyRef Name="ID_MICRO" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdMicro_Bridge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_VIBRATO">
+          <End Role="Les_Vibratos" Type="Self.Les_Vibratos" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Self.Les_Guitares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Vibratos">
+              <PropertyRef Name="ID_VIBRATO" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdVibrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Les_Bois" EntityType="Self.Les_Bois" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Les_Clients" EntityType="Self.Les_Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Les_Guitares" EntityType="Self.Les_Guitares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Les_Micros" EntityType="Self.Les_Micros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Les_Vibratos" EntityType="Self.Les_Vibratos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GUITARE_BOIS" Association="Self.FK_GUITARE_BOIS">
+            <End Role="Les_Bois" EntitySet="Les_Bois" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_BOIS1" Association="Self.FK_GUITARE_BOIS1">
+            <End Role="Les_Bois" EntitySet="Les_Bois" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_BOIS2" Association="Self.FK_GUITARE_BOIS2">
+            <End Role="Les_Bois" EntitySet="Les_Bois" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_CLIENT" Association="Self.FK_GUITARE_CLIENT">
+            <End Role="Les_Clients" EntitySet="Les_Clients" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_MICRO" Association="Self.FK_GUITARE_MICRO">
+            <End Role="Les_Micros" EntitySet="Les_Micros" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_MICRO1" Association="Self.FK_GUITARE_MICRO1">
+            <End Role="Les_Micros" EntitySet="Les_Micros" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_MICRO2" Association="Self.FK_GUITARE_MICRO2">
+            <End Role="Les_Micros" EntitySet="Les_Micros" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_VIBRATO" Association="Self.FK_GUITARE_VIBRATO">
+            <End Role="Les_Vibratos" EntitySet="Les_Vibratos" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C_BOIS">
+          <Key>
+            <PropertyRef Name="ID_BOIS" />
+          </Key>
+          <Property Name="ID_BOIS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="Origine" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="C_CLIENT">
+          <Key>
+            <PropertyRef Name="ID_CLIENT" />
+          </Key>
+          <Property Name="ID_CLIENT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="C_GUITARE">
+          <Key>
+            <PropertyRef Name="ID_GUITARE" />
+          </Key>
+          <Property Name="ID_GUITARE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" />
+          <Property Name="IdVibrato" Type="Int32" />
+          <Property Name="IdBois_Corps" Type="Int32" />
+          <Property Name="IdBois_Manche" Type="Int32" />
+          <Property Name="IdBois_Touche" Type="Int32" />
+          <Property Name="IdMicro_Neck" Type="Int32" />
+          <Property Name="IdMicro_Central" Type="Int32" />
+          <Property Name="IdMicro_Bridge" Type="Int32" />
+          <NavigationProperty Name="Le_Bois_Corps" Relationship="Self.FK_GUITARE_BOIS" FromRole="Les_Guitares" ToRole="Les_Bois" />
+          <NavigationProperty Name="Le_Bois_Manche" Relationship="Self.FK_GUITARE_BOIS1" FromRole="Les_Guitares" ToRole="Les_Bois" />
+          <NavigationProperty Name="Le_Bois_Touche" Relationship="Self.FK_GUITARE_BOIS2" FromRole="Les_Guitares" ToRole="Les_Bois" />
+          <NavigationProperty Name="Le_Proprietaire" Relationship="Self.FK_GUITARE_CLIENT" FromRole="Les_Guitares" ToRole="Les_Clients" />
+          <NavigationProperty Name="Le_Micro_Neck" Relationship="Self.FK_GUITARE_MICRO" FromRole="Les_Guitares" ToRole="Les_Micros" />
+          <NavigationProperty Name="Le_Micro_Central" Relationship="Self.FK_GUITARE_MICRO1" FromRole="Les_Guitares" ToRole="Les_Micros" />
+          <NavigationProperty Name="Le_Micro_Bridge" Relationship="Self.FK_GUITARE_MICRO2" FromRole="Les_Guitares" ToRole="Les_Micros" />
+          <NavigationProperty Name="Le_Vibrato" Relationship="Self.FK_GUITARE_VIBRATO" FromRole="Les_Guitares" ToRole="Les_Vibratos" />
+        </EntityType>
+        <EntityType Name="C_MICRO">
+          <Key>
+            <PropertyRef Name="ID_MICRO" />
+          </Key>
+          <Property Name="ID_MICRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="Reference" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="Marque" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="C_VIBRATO">
+          <Key>
+            <PropertyRef Name="ID_VIBRATO" />
+          </Key>
+          <Property Name="ID_VIBRATO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="Modele" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="Marque" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_GUITARE_BOIS">
+          <End Role="Les_Bois" Type="Model.C_BOIS" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Model.C_GUITARE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Bois">
+              <PropertyRef Name="ID_BOIS" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdBois_Corps" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_BOIS1">
+          <End Role="Les_Bois" Type="Model.C_BOIS" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Model.C_GUITARE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Bois">
+              <PropertyRef Name="ID_BOIS" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdBois_Manche" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_BOIS2">
+          <End Role="Les_Bois" Type="Model.C_BOIS" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Model.C_GUITARE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Bois">
+              <PropertyRef Name="ID_BOIS" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdBois_Touche" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_CLIENT">
+          <End Role="Les_Clients" Type="Model.C_CLIENT" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Model.C_GUITARE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Clients">
+              <PropertyRef Name="ID_CLIENT" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_MICRO">
+          <End Role="Les_Micros" Type="Model.C_MICRO" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Model.C_GUITARE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Micros">
+              <PropertyRef Name="ID_MICRO" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdMicro_Neck" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_MICRO1">
+          <End Role="Les_Micros" Type="Model.C_MICRO" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Model.C_GUITARE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Micros">
+              <PropertyRef Name="ID_MICRO" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdMicro_Central" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_MICRO2">
+          <End Role="Les_Micros" Type="Model.C_MICRO" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Model.C_GUITARE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Micros">
+              <PropertyRef Name="ID_MICRO" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdMicro_Bridge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUITARE_VIBRATO">
+          <End Role="Les_Vibratos" Type="Model.C_VIBRATO" Multiplicity="0..1" />
+          <End Role="Les_Guitares" Type="Model.C_GUITARE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Les_Vibratos">
+              <PropertyRef Name="ID_VIBRATO" />
+            </Principal>
+            <Dependent Role="Les_Guitares">
+              <PropertyRef Name="IdVibrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="C_BASE_AZURE" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Les_Bois" EntityType="Model.C_BOIS" />
+          <EntitySet Name="Les_Clients" EntityType="Model.C_CLIENT" />
+          <EntitySet Name="Les_Guitares" EntityType="Model.C_GUITARE" />
+          <EntitySet Name="Les_Micros" EntityType="Model.C_MICRO" />
+          <EntitySet Name="Les_Vibratos" EntityType="Model.C_VIBRATO" />
+          <AssociationSet Name="FK_GUITARE_BOIS" Association="Self.FK_GUITARE_BOIS">
+            <End Role="Les_Bois" EntitySet="Les_Bois" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_BOIS1" Association="Self.FK_GUITARE_BOIS1">
+            <End Role="Les_Bois" EntitySet="Les_Bois" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_BOIS2" Association="Self.FK_GUITARE_BOIS2">
+            <End Role="Les_Bois" EntitySet="Les_Bois" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_CLIENT" Association="Self.FK_GUITARE_CLIENT">
+            <End Role="Les_Clients" EntitySet="Les_Clients" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_MICRO" Association="Self.FK_GUITARE_MICRO">
+            <End Role="Les_Micros" EntitySet="Les_Micros" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_MICRO1" Association="Self.FK_GUITARE_MICRO1">
+            <End Role="Les_Micros" EntitySet="Les_Micros" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_MICRO2" Association="Self.FK_GUITARE_MICRO2">
+            <End Role="Les_Micros" EntitySet="Les_Micros" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUITARE_VIBRATO" Association="Self.FK_GUITARE_VIBRATO">
+            <End Role="Les_Vibratos" EntitySet="Les_Vibratos" />
+            <End Role="Les_Guitares" EntitySet="Les_Guitares" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="C_BASE_AZURE">
+          <EntitySetMapping Name="Les_Bois">
+            <EntityTypeMapping TypeName="Model.C_BOIS">
+              <MappingFragment StoreEntitySet="Les_Bois">
+                <ScalarProperty Name="ID_BOIS" ColumnName="ID_BOIS" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Origine" ColumnName="Origine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Les_Clients">
+            <EntityTypeMapping TypeName="Model.C_CLIENT">
+              <MappingFragment StoreEntitySet="Les_Clients">
+                <ScalarProperty Name="ID_CLIENT" ColumnName="ID_CLIENT" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Les_Guitares">
+            <EntityTypeMapping TypeName="Model.C_GUITARE">
+              <MappingFragment StoreEntitySet="Les_Guitares">
+                <ScalarProperty Name="ID_GUITARE" ColumnName="ID_GUITARE" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdVibrato" ColumnName="IdVibrato" />
+                <ScalarProperty Name="IdBois_Corps" ColumnName="IdBois_Corps" />
+                <ScalarProperty Name="IdBois_Manche" ColumnName="IdBois_Manche" />
+                <ScalarProperty Name="IdBois_Touche" ColumnName="IdBois_Touche" />
+                <ScalarProperty Name="IdMicro_Neck" ColumnName="IdMicro_Neck" />
+                <ScalarProperty Name="IdMicro_Central" ColumnName="IdMicro_Central" />
+                <ScalarProperty Name="IdMicro_Bridge" ColumnName="IdMicro_Bridge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Les_Micros">
+            <EntityTypeMapping TypeName="Model.C_MICRO">
+              <MappingFragment StoreEntitySet="Les_Micros">
+                <ScalarProperty Name="ID_MICRO" ColumnName="ID_MICRO" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Marque" ColumnName="Marque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Les_Vibratos">
+            <EntityTypeMapping TypeName="Model.C_VIBRATO">
+              <MappingFragment StoreEntitySet="Les_Vibratos">
+                <ScalarProperty Name="ID_VIBRATO" ColumnName="ID_VIBRATO" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Modele" ColumnName="Modele" />
+                <ScalarProperty Name="Marque" ColumnName="Marque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

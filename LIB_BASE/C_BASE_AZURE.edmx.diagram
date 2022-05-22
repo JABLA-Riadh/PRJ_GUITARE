@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1ff6f2467ed04de1b4b837c937e5ced4" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.C_BOIS" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.C_CLIENT" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.C_GUITARE" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.C_MICRO" Width="1.5" PointX="9.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.C_VIBRATO" Width="1.5" PointX="8.625" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_GUITARE_BOIS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_GUITARE_BOIS1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_GUITARE_BOIS2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_GUITARE_CLIENT" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_GUITARE_MICRO" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_GUITARE_MICRO1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_GUITARE_MICRO2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_GUITARE_VIBRATO" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
